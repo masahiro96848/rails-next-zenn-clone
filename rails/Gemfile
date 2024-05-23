@@ -12,13 +12,13 @@ gem 'bootsnap', require: false
 gem 'config'
 
 # ユーザー認証を提供する
-gem "devise"
+gem 'devise'
 
 # devise を日本語化する
-gem "devise-i18n"
+gem 'devise-i18n'
 
 # ユーザーのトークン認証を提供する
-gem "devise_token_auth"
+gem 'devise_token_auth'
 
 # MySQLに接続する
 gem 'mysql2', '~> 0.5'
