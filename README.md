@@ -15,7 +15,7 @@ docker compose build --no-cache
 docker compose up -d
 ```
 
-## コンテナ起動とサーバー起動を分離
+## コンテナ起動とサーバー起動を分離(railsコンテナ)
 ```
 docker compose exec rails /bin/bash
 
@@ -26,3 +26,34 @@ rails s -b '0.0.0.0'
 
 ## サーバーアクセス
 http://localhost:3000/
+
+## コンテナ起動(nextコンテナ)
+```
+docker compose exec next /bin/bash
+```
+
+## nextサーバー起動(nextコンテナ)
+```
+npm run dev
+```
+
+
+## rubocop実行(railsコンテナ)
+```
+rubocop
+```
+
+## rubocop自動修正(railsコンテナ)
+```
+rubocop -A
+```
+
+## lintの実行(nextコンテナ)
+```
+npm run lint
+```
+
+## lintの自動修正(nextコンテナ)
+```
+npm run format
+```
