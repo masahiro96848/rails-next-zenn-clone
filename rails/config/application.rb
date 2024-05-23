@@ -21,6 +21,8 @@ require 'action_view/railtie'
 Bundler.require(*Rails.groups)
 
 module Myapp
+  # Application is the primary class for configuring the Rails application.
+  # It sets up default configurations, middleware, and other settings for the app.
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
