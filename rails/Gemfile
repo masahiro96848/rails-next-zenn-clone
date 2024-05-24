@@ -36,6 +36,9 @@ gem 'rack-cors'
 gem 'rails', '~> 7.0.4'
 
 group :development, :test do
+  # テスト用データを作成する
+  gem 'factory_bot_rails'
+
   # 開発環境でメール送信をテストする
   gem 'letter_opener_web'
 
