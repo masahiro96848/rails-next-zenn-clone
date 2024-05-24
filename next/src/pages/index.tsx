@@ -1,7 +1,9 @@
-import { Box, Grid, Container } from '@mui/material'
+import { Box, Grid, Container, Pagination } from '@mui/material'
 import camelcaseKeys from 'camelcase-keys'
 import type { NextPage } from 'next'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import React from 'react'
 import useSWR from 'swr'
 import ArticleCard from '@/components/ArticleCard'
 import Error from '@/components/Error'
@@ -20,13 +22,20 @@ type ArticleProps = {
 }
 
 const Index: NextPage = () => {
-  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/articles`
+  const router = useRouter()
+  const page = 'page' in router.query ? Number(router.query.page) : 1
+  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/articles/?page=${page}`
 
   const { data, error } = useSWR(url, fetcher)
   if (error) return <Error />
   if (!data) return <Loading />
 
   const articles = camelcaseKeys(data.articles)
+  const meta = camelcaseKeys(data.meta)
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    router.push(`/?page=${value}`)
+  }
 
   return (
     <Box css={styles.pageMinHeight} sx={{ backgroundColor: '#e6f2ff' }}>
@@ -44,6 +53,13 @@ const Index: NextPage = () => {
             </Grid>
           ))}
         </Grid>
+        <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
+          <Pagination
+            count={meta.totalPages}
+            page={meta.currentPage}
+            onChange={handleChange}
+          />
+        </Box>
       </Container>
     </Box>
   )
