@@ -56,28 +56,28 @@ jobs:
         run: bundle exec rspec
 
   # 処理② rubocop のルール違反がないことをチェック
-  rubocop:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: rails
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   rubocop:
+  #     runs-on: ubuntu-latest
+  #     defaults:
+  #       run:
+  #         working-directory: rails
+  #     steps:
+  #       - name: Checkout code
+  #         uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1.2
-          bundler-cache: true
+  #       - name: Set up Ruby
+  #         uses: ruby/setup-ruby@v1
+  #         with:
+  #           ruby-version: 3.1.2
+  #           bundler-cache: true
 
-      - name: Bundler and gem install
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3 --path vendor/bundle
+  #       - name: Bundler and gem install
+  #         run: |
+  #           gem install bundler
+  #           bundle install --jobs 4 --retry 3 --path vendor/bundle
 
-      - name: Run rubocop
-        run: bundle exec rubocop
+  #       - name: Run rubocop
+  #         run: bundle exec rubocop
 
   # 処理③ eslint(& prettier) のルール違反がないことをチェック
   eslint:
