@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ArticleSerializer < ActiveModel::Serializer
-  attributes :id, :title, :content, :created_at, :from_today
+  attributes :id, :title, :content, :status, :created_at, :from_today
   belongs_to :user, serializer: UserSerializer
 
   def created_at
@@ -30,5 +30,9 @@ class ArticleSerializer < ActiveModel::Serializer
     return "#{minutes}分前" if minutes.positive?
 
     "#{seconds}秒前"
+  end
+
+  def status
+    object.status_i18n
   end
 end
