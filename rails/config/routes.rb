@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       mount_devise_token_auth_for 'User', at: 'auth'
 
       namespace :current do
-        resource :user, only: [:show]
+        resource :user, only: %i[show]
         resources :articles, only: %i[index show create update]
       end
       resources :articles, only: %i[index show]
