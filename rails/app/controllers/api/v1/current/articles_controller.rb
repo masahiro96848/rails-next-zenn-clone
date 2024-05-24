@@ -10,6 +10,18 @@ module Api
           unsaved_article = current_user.articles.unsaved.first || current_user.articles.create!(status: :unsaved)
           render json: unsaved_article
         end
+
+        def update
+          article = current_user.articles.find(params[:id])
+          article.update!(article_params)
+          render json: article
+        end
+
+        private
+
+        def article_params
+          params.require(:article).permit(:title, :content, :status)
+        end
       end
     end
   end
