@@ -4,6 +4,9 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import useSWR from 'swr'
 import ArticleCard from '@/components/ArticleCard'
+import Error from '@/components/Error'
+import Loading from '@/components/Loading'
+import { styles } from '@/styles'
 import { fetcher } from '@/utils'
 
 type ArticleProps = {
@@ -20,13 +23,13 @@ const Index: NextPage = () => {
   const url = 'http://localhost:3000/api/v1/articles'
 
   const { data, error } = useSWR(url, fetcher)
-  if (error) return <div>An error has occurred</div>
-  if (!data) return <div>Loading...</div>
+  if (error) return <Error />
+  if (!data) return <Loading />
 
   const articles = camelcaseKeys(data.articles)
 
   return (
-    <Box sx={{ backgroundColor: '#e6f2ff', minHeight: '100vh' }}>
+    <Box css={styles.pageMinHeight} sx={{ backgroundColor: '#e6f2ff' }}>
       <Container maxWidth="md" sx={{ pt: 6 }}>
         <Grid container spacing={4}>
           {articles.map((article: ArticleProps, i: number) => (
