@@ -31,10 +31,11 @@ type ArticleProps = {
 
 const ArticleDetail: NextPage = () => {
   const router = useRouter()
-  const url = process.env.NEXT_PUBLIC_API_BASE_URL + '/articles/'
+  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/articles/`
   const { id } = router.query
 
-  const { data, error } = useSWR(id ? url + id : null, fetcher)
+  const { data, error } = useSWR(id ? `${url}${id}` : null, fetcher)
+
   if (error) return <Error />
   if (!data) return <Loading />
 
